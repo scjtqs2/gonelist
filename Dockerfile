@@ -5,7 +5,7 @@ FROM golang:1.17.7 as builder
 WORKDIR /root/myapp/
 
 ARG GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy/,https://goproxy.io,direct
-ARG LDFLAGS
+ARG LDFLAGS="-s -w"
 ARG GOARCH
 
 COPY ./ ./
@@ -17,7 +17,7 @@ FROM alpine:3.12
 
 WORKDIR /opt
 
-ARG VERSION=v0.5.3
+ARG VERSION=v0.6.0
 ARG TZ="Asia/Shanghai"
 
 COPY --from=builder /root/myapp/gonelist /bin/gonelist
